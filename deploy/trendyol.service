@@ -1,0 +1,24 @@
+[Unit]
+Description=Trendyol Go crawler
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=trendyol
+Group=trendyol
+WorkingDirectory=/opt/trendyol
+EnvironmentFile=/opt/trendyol/.env
+ExecStart=/opt/trendyol/bin/trendyol run
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=240
+LimitNOFILE=262144
+TasksMax=4096
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/trendyol/state /opt/trendyol/out
+
+[Install]
+WantedBy=multi-user.target
